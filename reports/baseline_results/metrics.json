@@ -1,0 +1,272 @@
+{
+  "dataset_info": {
+    "evaluation_set_size": 200,
+    "train_corpus_size": 8000
+  },
+  "baseline_1_majority": {
+    "learned_majority_intent": "other_unknown",
+    "learned_majority_handling": "AUTO_HANDLE",
+    "intent_accuracy": 0.04,
+    "intent_macro_f1": 0.007,
+    "intent_weighted_f1": 0.0031,
+    "triage_accuracy": 0.7,
+    "triage_escalate_f1": 0.0,
+    "dangerous_false_auto_handles": 60
+  },
+  "baseline_2_tfidf": {
+    "intent_accuracy": 0.705,
+    "intent_macro_f1": 0.6915,
+    "intent_weighted_f1": 0.7276,
+    "intent_macro_precision": 0.7902,
+    "intent_macro_recall": 0.7008,
+    "per_intent_metrics": {
+      "account_access_and_security": {
+        "precision": 1.0,
+        "recall": 0.6,
+        "f1": 0.75,
+        "support": 10
+      },
+      "damaged_defective_or_wrong_item": {
+        "precision": 0.9375,
+        "recall": 0.75,
+        "f1": 0.8333,
+        "support": 20
+      },
+      "delivery_status_tracking": {
+        "precision": 0.9091,
+        "recall": 0.7143,
+        "f1": 0.8,
+        "support": 28
+      },
+      "late_delivery_complaint": {
+        "precision": 0.9,
+        "recall": 0.8438,
+        "f1": 0.871,
+        "support": 32
+      },
+      "order_cancellation_request": {
+        "precision": 0.7,
+        "recall": 0.5385,
+        "f1": 0.6087,
+        "support": 13
+      },
+      "order_delivered_not_received": {
+        "precision": 1.0,
+        "recall": 0.3125,
+        "f1": 0.4762,
+        "support": 16
+      },
+      "other_unknown": {
+        "precision": 0.2222,
+        "recall": 1.0,
+        "f1": 0.3636,
+        "support": 8
+      },
+      "payment_and_billing_issues": {
+        "precision": 1.0,
+        "recall": 0.8,
+        "f1": 0.8889,
+        "support": 15
+      },
+      "prime_membership_and_digital": {
+        "precision": 0.5238,
+        "recall": 0.7857,
+        "f1": 0.6286,
+        "support": 14
+      },
+      "refund_status_and_request": {
+        "precision": 0.6429,
+        "recall": 0.8182,
+        "f1": 0.72,
+        "support": 22
+      },
+      "return_and_pickup_inquiry": {
+        "precision": 0.8571,
+        "recall": 0.5455,
+        "f1": 0.6667,
+        "support": 22
+      }
+    },
+    "confusion_matrix_labels": [
+      "account_access_and_security",
+      "damaged_defective_or_wrong_item",
+      "delivery_status_tracking",
+      "late_delivery_complaint",
+      "order_cancellation_request",
+      "order_delivered_not_received",
+      "other_unknown",
+      "payment_and_billing_issues",
+      "prime_membership_and_digital",
+      "refund_status_and_request",
+      "return_and_pickup_inquiry"
+    ],
+    "confusion_matrix": [
+      [
+        6,
+        1,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        15,
+        0,
+        1,
+        0,
+        0,
+        4,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        20,
+        1,
+        0,
+        0,
+        3,
+        0,
+        1,
+        3,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        27,
+        0,
+        0,
+        3,
+        0,
+        1,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        7,
+        0,
+        2,
+        0,
+        3,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        2,
+        0,
+        0,
+        5,
+        7,
+        0,
+        0,
+        1,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        8,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        12,
+        1,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        11,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        1,
+        0,
+        0,
+        18,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        2,
+        0,
+        3,
+        4,
+        12
+      ]
+    ],
+    "triage_accuracy": 0.635,
+    "triage_escalate_precision": 0.4235,
+    "triage_escalate_recall": 0.6,
+    "triage_escalate_f1": 0.4966,
+    "dangerous_false_auto_handles": 24,
+    "triage_confusion_matrix": [
+      [
+        91,
+        49
+      ],
+      [
+        24,
+        36
+      ]
+    ]
+  },
+  "retrieval_baseline": {
+    "mean_similarity": 0.2822,
+    "median_similarity": 0.2611,
+    "sim_gte_0_5_count": 5,
+    "sim_gte_0_5_pct": 2.5,
+    "sim_gte_0_3_count": 61,
+    "sim_gte_0_3_pct": 30.5
+  }
+}
