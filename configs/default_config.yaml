@@ -1,0 +1,84 @@
+# System Configuration for AI Customer Support Agent (AmazonHelp)
+
+brand:
+  target_brand: "AmazonHelp"
+  domain: "e-commerce"
+  default_signoff: "^AI"
+
+language:
+  mode: "english_only" # Options: "english_only", "all"
+  min_confidence: 0.5
+
+pii_sanitization:
+  mask_order_ids: true
+  mask_emails: true
+  mask_phones: true
+  mask_urls: true
+  mask_customer_handles: true
+  strip_agent_signatures: true
+
+data:
+  raw_data_path: "data/raw/twcs.csv"
+  processed_raw_path: "data/processed/amazonhelp_raw.parquet"
+  processed_conversations_path: "data/processed/amazonhelp_conversations.parquet"
+  dev_sample_path: "data/samples/amazonhelp_dev_sample.parquet"
+  golden_data_path: "data/golden/golden_eval_set.json"
+  dev_sample_size: 5000
+  random_seed: 42
+
+split:
+  strategy: "chronological"
+  train_dev_ratio: 0.85
+  eval_ratio: 0.15
+  enforce_disjoint_conversations: true
+
+embedding:
+  model_name: "sentence-transformers/all-MiniLM-L6-v2"
+  normalize_embeddings: true
+  batch_size: 64
+  dimension: 384
+
+retrieval:
+  faiss_index_path: "data/processed/faiss_index.bin"
+  metadata_path: "data/processed/resolution_metadata.parquet"
+  candidate_k: 10
+  top_k: 5
+  context_strategy: "current_only" # Options: "current_only", "context_plus_current"
+  deduplicate_corpus: true
+
+intent_reranking:
+  enabled: true
+  mode: "soft_rerank" # Options: "soft_rerank", "hard_intent_filter"
+  intent_match_bonus: 0.10
+  min_confidence: 0.60
+  candidate_k: 10
+  top_k: 5
+
+
+
+generation:
+  max_evidence_items: 3
+  min_similarity: 0.55
+  max_regeneration_attempts: 1
+  deduplicate_templates: true
+
+guardrails:
+  enforce_pii_check: true
+  enforce_live_claim_check: true
+  enforce_date_leakage_check: true
+
+triage:
+  min_intent_confidence: 0.60
+  min_evidence_quality: 0.50
+  safety_priority: "conservative"
+
+llm:
+  provider: "mock" # Options: mock, gemini, openai
+  model: "gemini-2.5-flash"
+  temperature: 0.1
+  max_output_tokens: 512
+
+evaluation:
+  batch_size: 10
+  llm_judge_model: "gemini-2.5-flash"
+
