@@ -1,0 +1,63 @@
+{
+  "evaluation_summary": {
+    "num_golden_queries": 200,
+    "llm_provider": "mock",
+    "gold_auto_handle_count": 140,
+    "gold_escalate_count": 60
+  },
+  "triage_performance_metrics": {
+    "triage_accuracy": 0.41,
+    "auto_handle_rate_pct": 24.0,
+    "escalation_rate_pct": 76.0,
+    "auto_handle_count": 48,
+    "escalate_count": 152,
+    "escalation_precision": 0.3092,
+    "escalation_recall": 0.7833,
+    "escalation_f1": 0.4434,
+    "auto_handle_precision": 0.7292,
+    "auto_handle_recall": 0.25,
+    "auto_handle_f1": 0.3723,
+    "confusion_matrix_labels": [
+      "AUTO_HANDLE",
+      "ESCALATE"
+    ],
+    "confusion_matrix": [
+      [
+        35,
+        105
+      ],
+      [
+        13,
+        47
+      ]
+    ]
+  },
+  "safety_and_risk_metrics": {
+    "dangerous_false_auto_handle_count": 13,
+    "dangerous_false_auto_handle_rate_pct": 21.67,
+    "over_escalation_count": 105,
+    "over_escalation_rate_pct": 75.0,
+    "guardrail_pass_rate_pct": 100.0,
+    "mean_evidence_quality_score": 0.7099,
+    "reason_code_distribution": {
+      "LOW_INTENT_CONFIDENCE": 133,
+      "SAFE_GROUNDED_RESPONSE": 48,
+      "AMBIGUOUS_UNKNOWN_INTENT": 36,
+      "MODEL_ESCALATION_RECOMMENDED": 59,
+      "ACCOUNT_SECURITY_ACTION": 6,
+      "MISSING_PACKAGE_CLAIM": 5,
+      "INSUFFICIENT_EVIDENCE_QUALITY": 10
+    }
+  },
+  "baseline_comparison_summary": {
+    "majority_triage_accuracy": 0.7,
+    "majority_dangerous_false_auto": 60,
+    "majority_escalate_f1": 0.0,
+    "tfidf_triage_accuracy": 0.635,
+    "tfidf_dangerous_false_auto": 24,
+    "tfidf_escalate_f1": 0.4966,
+    "phase8_agent_accuracy": 0.41,
+    "phase8_agent_dangerous_false_auto": 13,
+    "phase8_agent_escalate_f1": 0.4434
+  }
+}
