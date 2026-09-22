@@ -8,6 +8,12 @@ import json
 import abc
 from typing import Optional, Dict, Any
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
 from src.evaluation.judge.judge_schema import JudgeScore, EvaluationRecord
 from src.evaluation.judge.judge_prompt import JudgePromptBuilder
 
@@ -217,9 +223,11 @@ def get_llm_judge(
     if prov == "mock":
         return MockLLMJudge()
     elif prov in ["gemini", "google"]:
-        return GeminiLLMJudge(model_name=model_name or "gemini-2.5-flash", api_key=api_key)
+        target_model = model_name or os.environ.get("JUDGE_MODEL") or "gemini-3.6-flash"
+        return GeminiLLMJudge(model_name=target_model, api_key=api_key)
     elif prov in ["openai", "gpt"]:
-        return OpenAILLMJudge(model_name=model_name or "gpt-4o-mini", api_key=api_key)
+        target_model = model_name or os.environ.get("JUDGE_MODEL") or "gpt-4o-mini"
+        return OpenAILLMJudge(model_name=target_model, api_key=api_key)
     else:
         print(f"Warning: Unknown JUDGE_PROVIDER '{prov}'. Defaulting to MockLLMJudge.")
         return MockLLMJudge()

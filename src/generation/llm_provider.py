@@ -6,6 +6,12 @@ import json
 import abc
 from typing import Optional, Dict, Any
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
 from src.generation.response_schema import GeneratedResponse
 
 
@@ -135,13 +141,21 @@ class GeminiLLMProvider(LLMProvider):
         temperature: float = 0.1,
         max_tokens: int = 512,
     ) -> str:
+        import time
         client = self._get_client()
         full_content = f"{system_prompt}\n\n{user_prompt}" if system_prompt else user_prompt
-        response = client.models.generate_content(
-            model=self.model_name,
-            contents=full_content,
-        )
-        return response.text
+        last_error = None
+        for attempt in range(3):
+            try:
+                response = client.models.generate_content(
+                    model=self.model_name,
+                    contents=full_content,
+                )
+                return response.text or ""
+            except Exception as e:
+                last_error = e
+                time.sleep(1.5 * (attempt + 1))
+        raise RuntimeError(f"Gemini generation failed after 3 attempts: {last_error}")
 
 
 class OpenAILLMProvider(LLMProvider):
@@ -194,9 +208,11 @@ def get_llm_provider(
     if prov == "mock":
         return MockLLMProvider()
     elif prov in ["gemini", "google"]:
-        return GeminiLLMProvider(model_name=model_name or "gemini-2.5-flash", api_key=api_key)
+        target_model = model_name or os.environ.get("LLM_MODEL") or "gemini-3.6-flash"
+        return GeminiLLMProvider(model_name=target_model, api_key=api_key)
     elif prov in ["openai", "gpt"]:
-        return OpenAILLMProvider(model_name=model_name or "gpt-4o-mini", api_key=api_key)
+        target_model = model_name or os.environ.get("LLM_MODEL") or "gpt-4o-mini"
+        return OpenAILLMProvider(model_name=target_model, api_key=api_key)
     else:
         print(f"Warning: Unknown LLM provider '{prov}'. Falling back to MockLLMProvider.")
         return MockLLMProvider()

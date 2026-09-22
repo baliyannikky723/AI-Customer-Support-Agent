@@ -74,11 +74,11 @@ triage:
 
 llm:
   provider: "mock" # Options: mock, gemini, openai
-  model: "gemini-2.5-flash"
+  model: "gemini-3.6-flash"
   temperature: 0.1
   max_output_tokens: 512
 
 evaluation:
   batch_size: 10
-  llm_judge_model: "gemini-2.5-flash"
+  llm_judge_model: "gemini-3.6-flash"
 

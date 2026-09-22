@@ -106,6 +106,56 @@ class AISupportAgent:
                 min_evidence_quality=min_e_qual,
             )
 
+        self._auto_load_defaults()
+
+    def _auto_load_defaults(self):
+        """Auto-load FAISS index and train classifier if default files exist and not yet loaded."""
+        import pandas as pd
+        index_path = Path("data/processed/faiss_index.bin")
+        meta_path = Path("data/processed/resolution_metadata.parquet")
+        train_path = Path("data/samples/intent_discovery_cases.parquet")
+
+        if index_path.exists() and meta_path.exists() and self.retriever.index is None:
+            try:
+                self.load_resources(index_path=str(index_path), metadata_path=str(meta_path))
+            except Exception as e:
+                pass
+
+        if train_path.exists() and not getattr(self.classifier, "is_fitted", False):
+            try:
+                df = pd.read_parquet(train_path)
+                query_col = "customer_query" if "customer_query" in df.columns else ("customer_text" if "customer_text" in df.columns else None)
+                if query_col:
+                    X_tr = df[query_col].astype(str).tolist()
+                    def _get_intent(text):
+                        t = str(text).lower()
+                        if any(k in t for k in ["login", "log in", "password", "locked account", "otp", "2fa", "hacked", "unauthorized"]):
+                            return "account_access_and_security"
+                        elif any(k in t for k in ["damaged", "broken", "crushed", "wrong item", "defective", "missing parts", "shattered", "scratched", "empty box"]):
+                            return "damaged_defective_or_wrong_item"
+                        elif any(k in t for k in ["says delivered", "marked delivered", "shows delivered", "not received", "missing package", "handed to resident"]):
+                            return "order_delivered_not_received"
+                        elif any(k in t for k in ["late", "delayed", "hasn't arrived", "still waiting", "missed date", "overdue", "running late"]):
+                            return "late_delivery_complaint"
+                        elif any(k in t for k in ["track", "tracking", "where is my", "dispatch", "carrier", "courier", "when will", "status"]):
+                            return "delivery_status_tracking"
+                        elif any(k in t for k in ["return", "pickup", "pick up", "send back", "exchange", "return label", "return policy"]):
+                            return "return_and_pickup_inquiry"
+                        elif any(k in t for k in ["refund", "money back", "credited", "reimburse", "bank account", "refund status"]):
+                            return "refund_status_and_request"
+                        elif any(k in t for k in ["cancel", "cancellation", "cancel order", "stop delivery"]):
+                            return "order_cancellation_request"
+                        elif any(k in t for k in ["charged twice", "double charge", "payment failed", "card declined", "debited", "gift card"]):
+                            return "payment_and_billing_issues"
+                        elif any(k in t for k in ["prime", "prime video", "subtitles", "alexa", "echo", "kindle"]):
+                            return "prime_membership_and_digital"
+                        else:
+                            return "other_unknown"
+                    y_tr = [_get_intent(q) for q in X_tr]
+                    self.fit_classifier(X_tr, y_tr)
+            except Exception as e:
+                pass
+
     def load_resources(
         self,
         index_path: str = "data/processed/faiss_index.bin",
@@ -135,6 +185,10 @@ class AISupportAgent:
             gold_handlings=[gold_handling] if gold_handling else None,
         )
         return bundles[0]
+
+    def process(self, customer_text: str, query_id: str = "") -> AgentResponseBundle:
+        """Convenient alias for process_message."""
+        return self.process_message(customer_message=customer_text, query_id=query_id)
 
     def batch_process(
         self,
