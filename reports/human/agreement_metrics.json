@@ -1,0 +1,9 @@
+{
+  "status": "HUMAN_AGREEMENT_NOT_YET_MEASURED",
+  "message": "Human annotations have not yet been completed. Evaluation framework is fully ready.",
+  "human_evaluation_set_path": "data/evaluation/human_eval_set.jsonl",
+  "annotation_template_path": "data/evaluation/human_annotations_template.jsonl",
+  "instructions": "1. Annotate 50 examples in data/evaluation/human_annotations_template.jsonl\n2. Save completed file to data/evaluation/human_annotations.jsonl\n3. Re-run: python scripts/analyze_judge_human_agreement.py",
+  "num_golden_examples": 200,
+  "num_sampled_human_subset": 50
+}

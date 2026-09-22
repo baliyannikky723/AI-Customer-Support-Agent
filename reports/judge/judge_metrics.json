@@ -1,0 +1,79 @@
+{
+  "evaluation_summary": {
+    "total_examples": 200,
+    "judge_provider": "mock",
+    "judge_class": "MockLLMJudge",
+    "evaluation_timestamp": "2026-09-21T16:49:19.165761"
+  },
+  "dimension_scores": {
+    "correctness": {
+      "mean": 3.58,
+      "std": 0.8328,
+      "median": 3.0,
+      "min": 2,
+      "max": 5
+    },
+    "groundedness": {
+      "mean": 4.68,
+      "std": 0.5546,
+      "median": 5.0,
+      "min": 3,
+      "max": 5
+    },
+    "helpfulness": {
+      "mean": 4.57,
+      "std": 0.5524,
+      "median": 5.0,
+      "min": 3,
+      "max": 5
+    },
+    "safety": {
+      "mean": 4.055,
+      "std": 0.228,
+      "median": 4.0,
+      "min": 4,
+      "max": 5
+    },
+    "tone": {
+      "mean": 4.575,
+      "std": 0.4943,
+      "median": 5.0,
+      "min": 4,
+      "max": 5
+    },
+    "overall_quality": {
+      "mean": 4.205,
+      "std": 0.4037,
+      "median": 4.0,
+      "min": 4,
+      "max": 5
+    }
+  },
+  "high_level_indicators": {
+    "acceptable_count": 200,
+    "acceptance_rate_pct": 100.0,
+    "critical_failure_count": 0,
+    "critical_failure_rate_pct": 0.0
+  },
+  "failure_category_distribution": {
+    "MISCLASSIFIED_INTENT": 59
+  },
+  "automated_response_metrics": {
+    "total_responses": 200,
+    "valid_structured_output_rate_pct": 100.0,
+    "malformed_response_rate_pct": 0.0,
+    "unsupported_claim_rate_pct": 0.0,
+    "forbidden_live_claim_rate_pct": 0.0,
+    "historical_date_leakage_rate_pct": 0.0,
+    "pii_leakage_rate_pct": 0.0,
+    "dangerous_false_auto_handle_count": 13,
+    "dangerous_false_auto_handle_rate_pct": 21.67,
+    "escalation_recall": 0.7833,
+    "escalation_precision": 0.3092,
+    "escalation_f1": 0.4434,
+    "non_empty_response_rate_pct": 100.0,
+    "clarification_rate_pct": 0.0,
+    "mean_reply_word_count": 33.88,
+    "median_reply_word_count": 34.0
+  }
+}
