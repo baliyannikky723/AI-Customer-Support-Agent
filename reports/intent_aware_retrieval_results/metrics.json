@@ -1,0 +1,277 @@
+{
+  "evaluation_summary": {
+    "num_golden_queries": 200,
+    "indexed_corpus_size": 8000,
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "reranking_mode": "soft_rerank",
+    "intent_match_bonus": 0.1,
+    "min_confidence_gate": 0.6,
+    "candidate_k": 10,
+    "output_top_k": 5
+  },
+  "intent_classification_metrics": {
+    "accuracy": 0.705,
+    "macro_precision": 0.7902,
+    "macro_recall": 0.7008,
+    "macro_f1": 0.6915,
+    "weighted_f1": 0.7276,
+    "per_intent_metrics": {
+      "account_access_and_security": {
+        "precision": 1.0,
+        "recall": 0.6,
+        "f1": 0.75,
+        "support": 10
+      },
+      "damaged_defective_or_wrong_item": {
+        "precision": 0.9375,
+        "recall": 0.75,
+        "f1": 0.8333,
+        "support": 20
+      },
+      "delivery_status_tracking": {
+        "precision": 0.9091,
+        "recall": 0.7143,
+        "f1": 0.8,
+        "support": 28
+      },
+      "late_delivery_complaint": {
+        "precision": 0.9,
+        "recall": 0.8438,
+        "f1": 0.871,
+        "support": 32
+      },
+      "order_cancellation_request": {
+        "precision": 0.7,
+        "recall": 0.5385,
+        "f1": 0.6087,
+        "support": 13
+      },
+      "order_delivered_not_received": {
+        "precision": 1.0,
+        "recall": 0.3125,
+        "f1": 0.4762,
+        "support": 16
+      },
+      "other_unknown": {
+        "precision": 0.2222,
+        "recall": 1.0,
+        "f1": 0.3636,
+        "support": 8
+      },
+      "payment_and_billing_issues": {
+        "precision": 1.0,
+        "recall": 0.8,
+        "f1": 0.8889,
+        "support": 15
+      },
+      "prime_membership_and_digital": {
+        "precision": 0.5238,
+        "recall": 0.7857,
+        "f1": 0.6286,
+        "support": 14
+      },
+      "refund_status_and_request": {
+        "precision": 0.6429,
+        "recall": 0.8182,
+        "f1": 0.72,
+        "support": 22
+      },
+      "return_and_pickup_inquiry": {
+        "precision": 0.8571,
+        "recall": 0.5455,
+        "f1": 0.6667,
+        "support": 22
+      }
+    },
+    "confusion_matrix": [
+      [
+        6,
+        1,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        15,
+        0,
+        1,
+        0,
+        0,
+        4,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        20,
+        1,
+        0,
+        0,
+        3,
+        0,
+        1,
+        3,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        27,
+        0,
+        0,
+        3,
+        0,
+        1,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        7,
+        0,
+        2,
+        0,
+        3,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        2,
+        0,
+        0,
+        5,
+        7,
+        0,
+        0,
+        1,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        8,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        12,
+        1,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        11,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        1,
+        0,
+        0,
+        18,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        2,
+        0,
+        3,
+        4,
+        12
+      ]
+    ],
+    "classes": [
+      "account_access_and_security",
+      "damaged_defective_or_wrong_item",
+      "delivery_status_tracking",
+      "late_delivery_complaint",
+      "order_cancellation_request",
+      "order_delivered_not_received",
+      "other_unknown",
+      "payment_and_billing_issues",
+      "prime_membership_and_digital",
+      "refund_status_and_request",
+      "return_and_pickup_inquiry"
+    ]
+  },
+  "retrieval_comparison_phase6_vs_phase7": {
+    "phase_6_semantic_top_1_same_intent_pct": 39.5,
+    "phase_7_reranked_top_1_same_intent_pct": 50.0,
+    "top_1_same_intent_absolute_gain_pct": 10.5,
+    "top_1_same_intent_relative_gain_pct": 26.58,
+    "phase_6_semantic_top_5_same_intent_pct": 65.5,
+    "phase_7_reranked_top_5_same_intent_pct": 68.5,
+    "phase_6_mean_top_1_similarity": 0.728,
+    "phase_7_mean_top_1_semantic_similarity": 0.7244,
+    "phase_7_mean_top_1_rerank_score": 0.7539,
+    "phase_6_median_top_1_similarity": 0.7273,
+    "phase_7_median_top_1_semantic_similarity": 0.7248,
+    "phase_6_mean_top_5_similarity": 0.6979,
+    "phase_7_mean_top_5_semantic_similarity": 0.6965,
+    "phase_7_top_1_gte_0_50_pct": 98.0,
+    "phase_7_top_1_gte_0_70_pct": 63.0
+  },
+  "candidate_movement_analysis": {
+    "top_1_changed_count": 23,
+    "top_1_changed_pct": 11.5,
+    "improved_intent_alignment_count": 21,
+    "improved_intent_alignment_pct": 10.5,
+    "worsened_raw_similarity_count": 23,
+    "worsened_raw_similarity_pct": 11.5,
+    "fallback_used_count": 133,
+    "fallback_used_pct": 66.5
+  },
+  "retrieval_diversity_metrics": {
+    "average_unique_templates_in_top_5": 5.0,
+    "high_diversity_top_5_queries_pct": 100.0,
+    "generic_canned_top_1_pct": 4.0
+  }
+}
