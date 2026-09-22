@@ -1,0 +1,51 @@
+{
+  "evaluation_summary": {
+    "num_golden_queries": 200,
+    "indexed_corpus_size": 8000,
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "embedding_dimension": 384,
+    "index_type": "IndexFlatIP",
+    "top_k": 5
+  },
+  "similarity_metrics": {
+    "mean_top_1_similarity": 0.728,
+    "median_top_1_similarity": 0.7273,
+    "std_top_1_similarity": 0.0828,
+    "min_top_1_similarity": 0.4514,
+    "max_top_1_similarity": 0.8936,
+    "mean_top_5_similarity": 0.6979,
+    "median_top_5_similarity": 0.6971,
+    "distribution": {
+      "top_1_gte_0_30_count": 200,
+      "top_1_gte_0_30_pct": 100.0,
+      "top_1_gte_0_50_count": 196,
+      "top_1_gte_0_50_pct": 98.0,
+      "top_1_gte_0_70_count": 130,
+      "top_1_gte_0_70_pct": 65.0
+    }
+  },
+  "baseline_comparison": {
+    "phase_5_tfidf_mean_sim": 0.2822,
+    "phase_6_semantic_mean_sim": 0.728,
+    "mean_sim_absolute_improvement": 0.4458,
+    "mean_sim_relative_gain_pct": 157.97,
+    "phase_5_tfidf_gte_0_50_pct": 2.5,
+    "phase_6_semantic_gte_0_50_pct": 98.0,
+    "phase_5_tfidf_gte_0_30_pct": 30.5,
+    "phase_6_semantic_gte_0_30_pct": 100.0
+  },
+  "intent_alignment_analysis_metrics": {
+    "same_intent_top_1_count": 79,
+    "same_intent_top_1_pct": 39.5,
+    "same_intent_in_top_5_count": 131,
+    "same_intent_in_top_5_pct": 65.5,
+    "note": "Analysis-only metrics. Golden intent was NOT used during retrieval or filtering."
+  },
+  "retrieval_diversity_metrics": {
+    "average_unique_templates_in_top_5": 5.0,
+    "all_top_5_identical_template_queries_pct": 0.0,
+    "high_diversity_top_5_queries_pct": 100.0,
+    "canned_top_1_pct": 4.5,
+    "canned_top_5_total_pct": 3.9
+  }
+}
